@@ -27,6 +27,7 @@
 pub struct Generator {
   pub base_url: String,
   pub image_size: Option<i32>,
+  pub include_file_extension: bool,
 }
 
 impl Default for Generator {
@@ -34,6 +35,7 @@ impl Default for Generator {
     Self {
       base_url: "www.gravatar.com".to_string(),
       image_size: None,
+      include_file_extension: false,
     }
   }
 }
@@ -65,7 +67,16 @@ impl Generator {
     let base_url = &self.base_url;
     let hash = Self::hash_email(email);
     let query_parameters = self.query_parameters();
-    format!("https://{base_url}/avatar/{hash}{query_parameters}")
+
+    let file_extension = if self.include_file_extension {
+      ".jpg"
+    } else {
+      ""
+    };
+
+    format!(
+      "https://{base_url}/avatar/{hash}{file_extension}{query_parameters}"
+    )
   }
 
   /// Returns all configurable options as a query parameter string.
@@ -113,6 +124,23 @@ impl Generator {
   pub fn set_image_size(self, image_size: i32) -> Self {
     Self {
       image_size: Some(image_size),
+      ..self
+    }
+  }
+
+  /// Configures the Generator to add `.jpg` to the end of the hash.
+  ///
+  /// ```rust
+  /// use gravatar_rs::Generator;
+  ///
+  /// Generator::default().set_include_file_extension(true);
+  /// ```
+  pub fn set_include_file_extension(
+    self,
+    include_file_extension: bool,
+  ) -> Self {
+    Self {
+      include_file_extension,
       ..self
     }
   }
