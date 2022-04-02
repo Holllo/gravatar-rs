@@ -66,7 +66,7 @@ impl Generator {
     format!("https://{base_url}/avatar/{hash}")
   }
 
-  /// Configures the Generator to use the base URL for generated URLs.
+  /// Configures the Generator to use a custom base URL for generated URLs.
   ///
   /// ```rust
   /// use gravatar_rs::Generator;
