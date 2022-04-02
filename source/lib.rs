@@ -26,12 +26,14 @@
 #[derive(Debug)]
 pub struct Generator {
   pub base_url: String,
+  pub image_size: Option<i32>,
 }
 
 impl Default for Generator {
   fn default() -> Self {
     Self {
       base_url: "www.gravatar.com".to_string(),
+      image_size: None,
     }
   }
 }
@@ -77,6 +79,21 @@ impl Generator {
   pub fn set_base_url(self, base_url: &str) -> Self {
     Self {
       base_url: base_url.to_string(),
+      ..self
+    }
+  }
+
+  /// Configures the Generator to include a `s=<image size>` in the URL.
+  ///
+  /// ```rust
+  /// use gravatar_rs::Generator;
+  ///
+  /// // Get 128px images instead of the default 80px.
+  /// Generator::default().set_image_size(128);
+  /// ```
+  pub fn set_image_size(self, image_size: i32) -> Self {
+    Self {
+      image_size: Some(image_size),
       ..self
     }
   }
