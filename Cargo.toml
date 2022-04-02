@@ -15,3 +15,6 @@ path = "source/lib.rs"
 
 [dependencies]
 md5 = "0.7.0"
+
+[dev-dependencies]
+insta = "1.14.0"
