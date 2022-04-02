@@ -20,6 +20,16 @@ fn test_hash_email() {
     Generator::hash_email(&format!("  {HOLLLO_EMAIL}  ")),
     HOLLLO_HASH
   );
+
+  // Make sure casing doesn't matter.
+  assert_eq!(
+    Generator::hash_email(&BAUKE_EMAIL.to_uppercase()),
+    BAUKE_HASH
+  );
+  assert_eq!(
+    Generator::hash_email(&HOLLLO_EMAIL.to_uppercase()),
+    HOLLLO_HASH
+  );
 }
 
 #[test]
