@@ -10,6 +10,16 @@ const HOLLLO_HASH: &str = "ebff9105dce4954b1bdb57fdab079ff3";
 fn test_hash_email() {
   assert_eq!(Generator::hash_email(BAUKE_EMAIL), BAUKE_HASH);
   assert_eq!(Generator::hash_email(HOLLLO_EMAIL), HOLLLO_HASH);
+
+  // Make sure leading and trailing whitespace is removed.
+  assert_eq!(
+    Generator::hash_email(&format!("  {BAUKE_EMAIL}  ")),
+    BAUKE_HASH
+  );
+  assert_eq!(
+    Generator::hash_email(&format!("  {HOLLLO_EMAIL}  ")),
+    HOLLLO_HASH
+  );
 }
 
 #[test]
