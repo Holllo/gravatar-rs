@@ -1,0 +1,8 @@
+---
+source: tests/lib.rs
+expression: urls
+---
+[
+    "https://www.gravatar.com/avatar/ecd836ee843ff0ab75d4720bd40c2baf",
+    "https://www.gravatar.com/avatar/ebff9105dce4954b1bdb57fdab079ff3",
+]

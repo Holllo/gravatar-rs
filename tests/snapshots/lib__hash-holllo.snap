@@ -1,0 +1,5 @@
+---
+source: tests/lib.rs
+expression: "Generator::hash_email(email)"
+---
+ebff9105dce4954b1bdb57fdab079ff3
