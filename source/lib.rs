@@ -24,6 +24,8 @@
 //!   "https://www.gravatar.com/avatar/ebff9105dce4954b1bdb57fdab079ff3"
 //! );
 //! ```
+//!
+//! For all possible options see [`Generator`].
 
 /// A generator for Gravatar image URLs.
 #[derive(Debug)]
