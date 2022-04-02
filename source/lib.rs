@@ -29,6 +29,7 @@
 
 /// A generator for Gravatar image URLs.
 #[derive(Debug)]
+#[non_exhaustive]
 pub struct Generator {
   /// The base URL for images, defaults to `www.gravatar.com`.
   pub base_url: String,
