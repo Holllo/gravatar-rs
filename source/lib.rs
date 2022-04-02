@@ -30,6 +30,7 @@ pub struct Generator {
   pub force_default: bool,
   pub image_size: Option<i32>,
   pub include_file_extension: bool,
+  pub rating: Option<String>,
 }
 
 impl Default for Generator {
@@ -40,6 +41,7 @@ impl Default for Generator {
       force_default: false,
       image_size: None,
       include_file_extension: false,
+      rating: None,
     }
   }
 }
@@ -101,6 +103,10 @@ impl Generator {
 
     if let Some(image_size) = self.image_size {
       query_parameters.push(format!("s={}", encode(image_size)));
+    }
+
+    if let Some(rating) = &self.rating {
+      query_parameters.push(format!("r={}", encode(rating)));
     }
 
     if query_parameters.is_empty() {
@@ -188,6 +194,25 @@ impl Generator {
   ) -> Self {
     Self {
       include_file_extension,
+      ..self
+    }
+  }
+
+  /// Configures the Generator to include `r=<rating>` in the URL.
+  ///
+  /// See the [Gravatar documentation] for all the possible ratings.
+  ///
+  /// [Gravatar documentation]: https://gravatar.com/site/implement/images/#rating
+  ///
+  /// ```rust
+  /// use gravatar_rs::Generator;
+  ///
+  /// // Allow G and PG rated images.
+  /// Generator::default().set_rating("pg");
+  /// ```
+  pub fn set_rating(self, rating: &str) -> Self {
+    Self {
+      rating: Some(rating.to_string()),
       ..self
     }
   }
