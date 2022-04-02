@@ -26,6 +26,7 @@
 #[derive(Debug)]
 pub struct Generator {
   pub base_url: String,
+  pub default_image: Option<String>,
   pub image_size: Option<i32>,
   pub include_file_extension: bool,
 }
@@ -34,6 +35,7 @@ impl Default for Generator {
   fn default() -> Self {
     Self {
       base_url: "www.gravatar.com".to_string(),
+      default_image: None,
       image_size: None,
       include_file_extension: false,
     }
@@ -87,6 +89,10 @@ impl Generator {
 
     let mut query_parameters = vec![];
 
+    if let Some(default_image) = &self.default_image {
+      query_parameters.push(format!("d={}", encode(default_image)));
+    }
+
     if let Some(image_size) = self.image_size {
       query_parameters.push(format!("s={}", encode(image_size)));
     }
@@ -109,6 +115,26 @@ impl Generator {
   pub fn set_base_url(self, base_url: &str) -> Self {
     Self {
       base_url: base_url.to_string(),
+      ..self
+    }
+  }
+
+  /// Configures the Generator to include `d=<default image>` in the URL.
+  ///
+  /// See the [Gravatar documentation] for all the possible ways to use it.
+  ///
+  /// [Gravatar documentation]: https://gravatar.com/site/implement/images/#default-image
+  ///
+  /// ```rust
+  /// use gravatar_rs::Generator;
+  ///
+  /// // Use the "identicon" default image, a geometric pattern based on the
+  /// // email hash.
+  /// Generator::default().set_default_image("identicon");
+  /// ```
+  pub fn set_default_image(self, default_image: &str) -> Self {
+    Self {
+      default_image: Some(default_image.to_string()),
       ..self
     }
   }
