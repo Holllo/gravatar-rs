@@ -3,6 +3,6 @@ source: tests/lib.rs
 expression: urls
 ---
 [
-    "https://cdn.libravatar.org/avatar/ecd836ee843ff0ab75d4720bd40c2baf?s=128",
-    "https://cdn.libravatar.org/avatar/ebff9105dce4954b1bdb57fdab079ff3?s=128",
+    "https://cdn.libravatar.org/avatar/ecd836ee843ff0ab75d4720bd40c2baf.jpg?d=identicon&f=y&s=128&r=pg",
+    "https://cdn.libravatar.org/avatar/ebff9105dce4954b1bdb57fdab079ff3.jpg?d=identicon&f=y&s=128&r=pg",
 ]

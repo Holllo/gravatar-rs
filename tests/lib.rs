@@ -44,7 +44,11 @@ fn test_generator() {
 fn test_all_options() {
   let generator = Generator::default()
     .set_base_url("cdn.libravatar.org")
-    .set_image_size(128);
+    .set_default_image("identicon")
+    .set_force_default(true)
+    .set_image_size(128)
+    .set_include_file_extension(true)
+    .set_rating("pg");
 
   let urls = [BAUKE_EMAIL, HOLLLO_EMAIL].map(|email| generator.generate(email));
   insta::assert_debug_snapshot!("generate-options", urls);
