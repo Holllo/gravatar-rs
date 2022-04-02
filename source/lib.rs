@@ -64,8 +64,27 @@ impl Generator {
   pub fn generate(&self, email: &str) -> String {
     let base_url = &self.base_url;
     let hash = Self::hash_email(email);
+    let query_parameters = self.query_parameters();
+    format!("https://{base_url}/avatar/{hash}{query_parameters}")
+  }
 
-    format!("https://{base_url}/avatar/{hash}")
+  /// Returns all configurable options as a query parameter string.
+  pub fn query_parameters(&self) -> String {
+    fn encode<D: std::fmt::Display>(data: D) -> String {
+      urlencoding::encode(&data.to_string()).into_owned()
+    }
+
+    let mut query_parameters = vec![];
+
+    if let Some(image_size) = self.image_size {
+      query_parameters.push(format!("s={}", encode(image_size)));
+    }
+
+    if query_parameters.is_empty() {
+      String::new()
+    } else {
+      format!("?{}", query_parameters.join("&"))
+    }
   }
 
   /// Configures the Generator to use a custom base URL for generated URLs.
