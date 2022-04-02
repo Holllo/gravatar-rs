@@ -1,0 +1,30 @@
+---
+source: tests/lib.rs
+expression: snapshot
+---
+[
+    (
+        "hash-bauke",
+        "ecd836ee843ff0ab75d4720bd40c2baf",
+    ),
+    (
+        "hash-bauke-whitespace",
+        "ecd836ee843ff0ab75d4720bd40c2baf",
+    ),
+    (
+        "hash-bauke-casing",
+        "ecd836ee843ff0ab75d4720bd40c2baf",
+    ),
+    (
+        "hash-holllo",
+        "ebff9105dce4954b1bdb57fdab079ff3",
+    ),
+    (
+        "hash-holllo-whitespace",
+        "ebff9105dce4954b1bdb57fdab079ff3",
+    ),
+    (
+        "hash-holllo-casing",
+        "ebff9105dce4954b1bdb57fdab079ff3",
+    ),
+]
