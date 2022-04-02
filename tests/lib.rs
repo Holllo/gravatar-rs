@@ -39,3 +39,13 @@ fn test_generator() {
     insta::assert_debug_snapshot!(format!("generate-{name}"), urls);
   }
 }
+
+#[test]
+fn test_all_options() {
+  let generator = Generator::default()
+    .set_base_url("cdn.libravatar.org")
+    .set_image_size(128);
+
+  let urls = [BAUKE_EMAIL, HOLLLO_EMAIL].map(|email| generator.generate(email));
+  insta::assert_debug_snapshot!("generate-options", urls);
+}
