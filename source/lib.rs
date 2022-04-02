@@ -27,6 +27,7 @@
 pub struct Generator {
   pub base_url: String,
   pub default_image: Option<String>,
+  pub force_default: bool,
   pub image_size: Option<i32>,
   pub include_file_extension: bool,
 }
@@ -36,6 +37,7 @@ impl Default for Generator {
     Self {
       base_url: "www.gravatar.com".to_string(),
       default_image: None,
+      force_default: false,
       image_size: None,
       include_file_extension: false,
     }
@@ -93,6 +95,10 @@ impl Generator {
       query_parameters.push(format!("d={}", encode(default_image)));
     }
 
+    if self.force_default {
+      query_parameters.push("f=y".to_string());
+    }
+
     if let Some(image_size) = self.image_size {
       query_parameters.push(format!("s={}", encode(image_size)));
     }
@@ -135,6 +141,21 @@ impl Generator {
   pub fn set_default_image(self, default_image: &str) -> Self {
     Self {
       default_image: Some(default_image.to_string()),
+      ..self
+    }
+  }
+
+  /// When set to true, the Generator will always add `f=y` to the URL. Making
+  /// Gravatar always return the default image.
+  ///
+  /// ```rust
+  /// use gravatar_rs::Generator;
+  ///
+  /// Generator::default().set_force_default(true);
+  /// ```
+  pub fn set_force_default(self, force_default: bool) -> Self {
+    Self {
+      force_default,
       ..self
     }
   }
