@@ -1,0 +1,17 @@
+# https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[package]
+name = "gravatar-rs"
+description = "Gravatar image URL library"
+authors = ["Holllo <helllo@holllo.cc>"]
+version = "0.1.0"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/Holllo/gravatar-rs"
+edition = "2021"
+keywords = ["gravatar", "ivatar", "libravatar"]
+
+[lib]
+path = "source/lib.rs"
+
+[dependencies]
+md5 = "0.7.0"
