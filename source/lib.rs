@@ -1,3 +1,6 @@
+#![forbid(unsafe_code)]
+#![warn(missing_docs, clippy::missing_docs_in_private_items)]
+
 //! # gravatar-rs
 //!
 //! This crate provides an API for creating [Gravatar image URLs], and by
@@ -25,11 +28,32 @@
 /// A generator for Gravatar image URLs.
 #[derive(Debug)]
 pub struct Generator {
+  /// The base URL for images, defaults to `www.gravatar.com`.
   pub base_url: String,
+
+  /// Which default image to use when there is no matching Gravatar, defaults
+  /// to `None`.
+  ///
+  /// See the [Gravatar documentation] for all the possible ways to use it.
+  ///
+  /// [Gravatar documentation]: https://gravatar.com/site/implement/images/#default-image
   pub default_image: Option<String>,
+
+  /// Whether you always want the default image to be returned, defaults to
+  /// `false`.
   pub force_default: bool,
+
+  /// A custom size for images, defaults to `None`.
   pub image_size: Option<i32>,
+
+  /// Whether to include `.jpg` in the image URL, defaults to false.
   pub include_file_extension: bool,
+
+  /// Which rating should be allowed, defaults to `None`.
+  ///
+  /// See the [Gravatar documentation] for all the possible ratings.
+  ///
+  /// [Gravatar documentation]: https://gravatar.com/site/implement/images/#rating
   pub rating: Option<String>,
 }
 
